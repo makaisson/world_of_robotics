@@ -6,9 +6,9 @@ describe Product do
   let(:product) { Product.new(title: "title") }
 
   describe "#price" do
-    it "should return the amount_in_cents in dollars" do
+    it "should return the amount_in_cents as a Money object" do
       product.amount_in_cents = 1234
-      product.price.should == 12.34
+      product.price.should == Money.new("1234")
     end
   end
 

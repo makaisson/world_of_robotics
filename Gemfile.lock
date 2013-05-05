@@ -71,6 +71,12 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.23)
+    money (5.1.1)
+      i18n (~> 0.6.0)
+    money-rails (0.8.0)
+      activesupport (>= 3.0)
+      money (~> 5.1.0)
+      railties (>= 3.0)
     multi_json (1.7.2)
     nestive (0.1.0)
       rails (~> 3.0)
@@ -154,6 +160,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   ir_b
   jquery-rails
+  money-rails
   nestive
   pg
   rails (= 3.2.13)
