@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>WorldOfRobotics</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-
-</body>
-</html>
+<%= extends :base do %>
+  <%= replace :title, "World of Robotics" %>
+  <%= replace :body do %>
+    <%= area :content do %>
+      <h1>World of Robotics</h1>
+    <% end %>
+  <% end %>
+<% end %>
