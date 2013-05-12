@@ -1,7 +1,10 @@
 require "spec_helper"
 
 describe Product do
-  it { should validate_presence_of(:title) }
+  describe "validations" do
+    it { should validate_presence_of(:title) }
+    it { should have_many(:categories).through(:categorizations) }
+  end
 
   let(:product) { Product.new(title: "title") }
 
