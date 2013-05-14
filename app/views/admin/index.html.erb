@@ -1,0 +1,11 @@
+<%= extends :application do %>
+  <%= append :content do %>
+    <h2>Admin Index</h2>
+
+    <h3>Products</h3>
+    <%= render collection: @products, partial: "products/product" %>
+
+    <h3>Categories</h3>
+    <%= render collection: @categories, partial: "categories/category" %>
+  <% end %>
+<% end %>

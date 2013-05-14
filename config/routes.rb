@@ -3,4 +3,6 @@ WorldOfRobotics::Application.routes.draw do
 
   resources :products
   resources :categories
+
+  resources :admin
 end
