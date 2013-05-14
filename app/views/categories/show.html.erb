@@ -1,0 +1,7 @@
+<%= extends :application do %>
+  <%= append :content do %>
+    <h2>Category Show for <%= @category.title %></h2>
+
+    <%= render partial: "category", locals: { category: @category } %>
+  <% end %>
+<% end %>

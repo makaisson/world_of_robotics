@@ -1,5 +1,7 @@
 <%= extends :application do %>
   <%= append :content do %>
     <h2>Product Index</h2>
+
+    <%= render collection: @products, partial: "product" %>
   <% end %>
 <% end %>

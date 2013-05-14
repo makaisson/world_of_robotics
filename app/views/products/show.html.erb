@@ -1,0 +1,7 @@
+<%= extends :application do %>
+  <%= append :content do %>
+    <h2>Product Show for <%= @product.title %></h2>
+
+    <%= render partial: "product", locals: { product: @product } %>
+  <% end %>
+<% end %>
