@@ -1,6 +1,9 @@
 <%= extends :base do %>
   <%= replace :title, "World of Robotics" %>
   <%= replace :body do %>
+    <%= area :nav_bar do %>
+      <%= render partial: "layouts/nav_bar" %>
+    <% end %>
     <%= area :content do %>
       <h1>World of Robotics</h1>
     <% end %>
