@@ -1,5 +1,6 @@
 class Product < ActiveRecord::Base
   has_many :categorizations
+  has_many :line_items
   has_many :categories, through: :categorizations
 
   attr_accessible :title, :description

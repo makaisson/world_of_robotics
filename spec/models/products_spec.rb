@@ -4,6 +4,7 @@ describe Product do
   describe "Validations" do
     it { should validate_presence_of(:title) }
     it { should have_many(:categories).through(:categorizations) }
+    it { should have_many(:line_items) }
   end
 
   describe "Getting and setting price" do
