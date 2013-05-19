@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :product do
-    title "product title"
-    description "product description"
-    amount_in_cents 1000
+    title { Faker::Name.name }
+    description { Faker::Lorem.paragraph(3) }
+    amount_in_cents { rand(1000..10000) }
   end
 end

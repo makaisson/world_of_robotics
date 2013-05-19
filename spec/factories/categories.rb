@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :category do
-    title "category title"
-    description "category description"
+    title { Faker::Name.name }
+    description { Faker::Lorem.paragraph(3) }
   end
 end

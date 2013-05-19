@@ -26,4 +26,5 @@ group :development, :test do
   gem 'ir_b'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'faker'
 end
