@@ -1,0 +1,8 @@
+<%= extends :application do %>
+  <%= append :content do %>
+    <h2>Cart show page</h2>
+
+    <h3>Line Items</h3>
+    <%= @cart.line_items %>
+  <% end %>
+<% end %>

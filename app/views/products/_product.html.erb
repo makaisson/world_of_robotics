@@ -7,3 +7,5 @@
 <p>
   <%= product.price %>
 </p>
+
+<%= button_to "Add to Cart", line_items_path(product_id: product.id) %>

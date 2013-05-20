@@ -3,6 +3,8 @@ WorldOfRobotics::Application.routes.draw do
 
   resources :products
   resources :categories
+  resources :line_items
+  resources :carts, only: [:show]
 
   resources :admin, only: [:index]
 end
