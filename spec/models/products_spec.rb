@@ -26,4 +26,15 @@ describe Product do
       end
     end
   end
+
+  describe "#ensure_not_referenced_by_any_line_items" do
+    context "line items reference the product" do
+      it "should add an error to the model base"
+      it "should return false"
+    end
+
+    context "not line items reference the product" do
+      it "should return true"
+    end
+  end
 end
