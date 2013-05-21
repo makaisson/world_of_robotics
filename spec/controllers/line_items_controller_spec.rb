@@ -37,5 +37,55 @@ describe LineItemsController do
 
       response.should redirect_to(root_path)
     end
+
+    context "no cart exists" do
+      before :each do
+        session[:cart_id] = nil
+      end
+
+      it "creates a new cart" do
+        Cart.should_receive(:create).and_return(cart)
+
+        post :create, :product_id => 678
+      end
+
+      it "saves the cart to the session" do
+        post :create, :product_id => 678
+
+        session[:cart_id].should == cart.id
+      end
+    end
+
+    context "cart exists in the session" do
+      before :each do
+        session[:cart_id] = cart.id
+      end
+
+      it "loads the existing cart" do
+        Cart.should_receive(:find).with(cart.id).and_return(cart)
+
+        post :create, :product_id => 678
+      end
+    end
+
+    context "card id exists but is not in the database" do
+      before :each do
+        session[:cart_id] = 432
+
+        Cart.stub :find => nil
+      end
+
+      it "creates a new cart" do
+        Cart.should_receive(:create).and_return(cart)
+
+        post :create, :product_id => 678
+      end
+
+      it "saves the cart to the session" do
+        post :create, :product_id => 678
+
+        session[:cart_id].should == cart.id
+      end
+    end
   end
 end
