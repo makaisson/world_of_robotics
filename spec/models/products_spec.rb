@@ -27,14 +27,41 @@ describe Product do
     end
   end
 
-  describe "#ensure_not_referenced_by_any_line_items" do
+  describe "#destroy" do
+    let(:product) { FactoryGirl.build :product }
+    let(:cart)    { FactoryGirl.build :cart }
+
     context "line items reference the product" do
-      it "should add an error to the model base"
-      it "should return false"
+      before :each do
+        line_item = LineItem.new
+        line_item.product = product
+        line_item.cart    = cart
+        line_item.save
+      end
+
+      it "should add an error to the model base" do
+        product.destroy
+
+        product.errors[:base].should == ['line items present']
+      end
+
+      it "should not delete the product" do
+        product.destroy
+
+        product.should be_persisted
+      end
     end
 
     context "not line items reference the product" do
-      it "should return true"
+      before :each do
+        LineItem.delete_all
+      end
+
+      it "should delete the product" do
+        product.destroy
+
+        product.should_not be_persisted
+      end
     end
   end
 end
