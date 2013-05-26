@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   private
 
   def current_cart
-    cart   = session[:cart_id] ? Cart.find(session[:cart_id]) : nil
+    cart   = session[:cart_id] ? Cart.find_by_id(session[:cart_id]) : nil
     cart ||= Cart.create
 
     session[:cart_id] = cart.id

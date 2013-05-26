@@ -27,13 +27,13 @@ describe LineItemsController do
     it "should redirect to the cart upon success" do
       post :create, :product_id => 487
 
-      response.should redirect_to(cart_path(cart)) 
+      response.should redirect_to(cart_path(cart))
     end
 
     it "should redirect to home upon failure" do
       service.stub(:add => false)
 
-      post :create, :product_id => 487 
+      post :create, :product_id => 487
 
       response.should redirect_to(root_path)
     end
@@ -62,17 +62,17 @@ describe LineItemsController do
       end
 
       it "loads the existing cart" do
-        Cart.should_receive(:find).with(cart.id).and_return(cart)
+        Cart.should_receive(:find_by_id).with(cart.id).and_return(cart)
 
         post :create, :product_id => 678
       end
     end
 
-    context "card id exists but is not in the database" do
+    context "cart id exists but is not in the database" do
       before :each do
         session[:cart_id] = 432
 
-        Cart.stub :find => nil
+        Cart.stub :find_by_id => nil
       end
 
       it "creates a new cart" do
