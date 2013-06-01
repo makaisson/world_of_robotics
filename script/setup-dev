@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -ex
+
+ruby -e "exit RUBY_VERSION >= '1.9.3'"
+(gem list bundler | grep bundler) || gem install bundler
+bundle check || bundle install
+
+if [ ! -f token/secret-token ]; then
+  mkdir -p token
+  bundle exec rake secret > token/secret-token
+fi
+
+bundle exec rake db:setup
