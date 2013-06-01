@@ -4,7 +4,7 @@ gem 'rails', '3.2.13'
 gem 'jquery-rails'
 gem 'pg'
 gem 'nestive'
-gem 'money-rails', '0.8.1'
+gem 'money-rails'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
