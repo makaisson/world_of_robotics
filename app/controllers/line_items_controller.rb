@@ -14,6 +14,7 @@ class LineItemsController < ApplicationController
     line_item = LineItem.find(params[:id])
     cart      = current_cart
 
+    # TODO: There is a race condition here.
     if line_item.quantity > 1
       line_item.update_attributes(quantity: line_item.quantity -= 1)
     else
