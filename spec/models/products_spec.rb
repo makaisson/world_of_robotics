@@ -64,4 +64,41 @@ describe Product do
       end
     end
   end
+
+  describe 'creating with a category' do
+    let(:category) { FactoryGirl.create :category }
+    let(:product_attributes) {
+      FactoryGirl.attributes_for(:product).slice(:title, :description).merge(
+        price: 10
+      )
+    }
+
+    it 'saves the product and associates it with a category' do
+      product = Product.create_with_category(
+        category.id,
+        product_attributes
+      )
+      product.should be_persisted
+      product.categories.should == [category]
+    end
+
+    it 'returns an invalid product if failed to save' do
+      product = Product.create_with_category(
+        category.id,
+        {}
+      )
+
+      product.should_not be_persisted
+      product.errors.should_not be_empty
+    end
+
+    it 'returns an unsaved product if category is invalid' do
+      pending("Unimplemented")
+      product = Product.create_with_category(
+        category.id + 1,
+        product_attributes
+      )
+      product.should_not be_persisted
+    end
+  end
 end

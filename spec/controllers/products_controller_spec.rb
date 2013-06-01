@@ -25,29 +25,28 @@ describe ProductsController do
   end
 
   describe "#create" do
-    let(:product)        { double(:product, id: 1) }
-    let(:categorization) { double(:categorization) }
+    let(:product) { double(:product, id: 1) }
 
     before do
-      Product.stub(:find) { product }
+      Product
+        .should_receive(:create_with_category)
+        .with('123', 'title' => 'Awesome Robot')
+        .and_return(product)
+
+      post :create, {
+        product:  {title: 'Awesome Robot'},
+        category: {id: 123}
+      }
     end
 
     context "successfully" do
-      pending "Can't stub out the join table, params is nil and breaks shit"
-      #before do
-      #  Categorization.stub(:create) { categorization }
-      #  product.should_receive(:save) { true }
-      #  post :create
-      #end
+      let(:product) { double('Product', persisted?: true) }
 
-      #it { should redirect_to(admin_index_path) }
+      it { should redirect_to(admin_index_path) }
     end
 
     context "unsuccessfully" do
-      before do
-        product.should_receive(:save) { false }
-        post :create
-      end
+      let(:product) { double('Product', persisted?: false) }
 
       it { should render_template(:new) }
     end

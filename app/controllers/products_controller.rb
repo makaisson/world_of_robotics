@@ -12,14 +12,12 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.find(params[:product])
+    @product = Product.create_with_category(
+      params[:category][:id],
+      params[:product],
+    )
 
-    if @product.save
-      # explicity create the join table entry because magic is hard
-      Categorization.create(
-        product_id: @product.id,
-        category_id: params[:category][:id]
-      )
+    if @product.persisted?
       redirect_to admin_index_path
     else
       render :new
