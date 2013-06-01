@@ -4,6 +4,7 @@ describe LineItem do
   describe "Validations" do
     it { should belong_to(:product) }
     it { should belong_to(:cart) }
+    it { should allow_mass_assignment_of(:quantity) }
   end
 
   describe "Quantity" do

@@ -3,6 +3,10 @@
     <h2>Cart show page</h2>
 
     <h3>Line Items</h3>
-    <%= @cart.line_items %>
+    <% @cart.line_items.each do |line_item| %>
+      <%= link_to line_item.product.title, line_item.product %>
+      <%= line_item.quantity %>
+      <%= button_to "Delete", line_item, method: :delete %>
+    <% end %>
   <% end %>
 <% end %>
