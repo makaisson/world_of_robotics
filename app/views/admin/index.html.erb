@@ -3,6 +3,7 @@
     <h2>Admin Index</h2>
 
     <h3>Products</h3>
+    <%= link_to "New Product", new_product_path %>
     <%= render collection: @products, partial: "products/product" %>
 
     <h3>Categories</h3>
