@@ -29,15 +29,16 @@ describe ProductsController do
     let(:categorization) { double(:categorization) }
 
     before do
-      Product.stub(:new)        { product }
+      Product.stub(:find) { product }
     end
 
     context "successfully" do
-      pending "can't stub out categorization :("
-      before do
-        product.should_receive(:save) { true }
-        #post :create
-      end
+      pending "Can't stub out the join table, params is nil and breaks shit"
+      #before do
+      #  Categorization.stub(:create) { categorization }
+      #  product.should_receive(:save) { true }
+      #  post :create
+      #end
 
       #it { should redirect_to(admin_index_path) }
     end

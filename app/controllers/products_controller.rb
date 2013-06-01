@@ -12,11 +12,11 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.new(params[:product])
+    @product = Product.find(params[:product])
 
     if @product.save
       # explicity create the join table entry because magic is hard
-      Categorization.new(
+      Categorization.create(
         product_id: @product.id,
         category_id: params[:category][:id]
       )
