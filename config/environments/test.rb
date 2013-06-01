@@ -34,4 +34,7 @@ WorldOfRobotics::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  # Disable whitelist protection because strong_parameters gem is being used.
+  config.active_record.whitelist_attributes = false
 end
