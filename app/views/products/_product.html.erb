@@ -1,9 +1,20 @@
 <p>
+  <h2>Title</h2>
   <%= product.title %>
 </p>
 <p>
+  <h3>Category</h3>
+  <% if product.categories.present? %>
+    <%= product.categories.first.title %>
+  <% else %>
+    No category
+  <% end %>
+</p>
+<p>
+  <h3>Description</h3>
   <%= product.description %>
 </p>
 <p>
+  <h3>Price</h3>
   <%= product.price %>
 </p>

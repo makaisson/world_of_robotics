@@ -14,10 +14,9 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(params[:product])
 
-    # QUESTION not sure how to do nice error handling
     if @product.save
       # explicity create the join table entry because magic is hard
-      Categorization.create(
+      Categorization.new(
         product_id: @product.id,
         category_id: params[:category][:id]
       )

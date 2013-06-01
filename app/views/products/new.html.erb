@@ -9,7 +9,6 @@
       </p>
       <p>
         <%= f.label           "Category"%></br>
-        <!-- passing in the category id as a seperate parameter -->
         <%= collection_select :category, :id, Category.all, :id, :title %>
       </p>
       <p>
