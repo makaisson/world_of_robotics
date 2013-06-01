@@ -17,4 +17,37 @@ describe ProductsController do
     it { should respond_with(:success) }
     it { should render_template(:show) }
   end
+
+  describe "#new" do
+    before { get(:new) }
+
+    it { should render_template(:new) }
+  end
+
+  describe "#create" do
+    let(:product)        { double(:product, id: 1) }
+    let(:categorization) { double(:categorization) }
+
+    before do
+      Product.stub(:new) { product }
+    end
+
+    context "successfully" do
+      before do
+        product.should_receive(:save) { true }
+        post :create
+      end
+
+      it { should redirect_to(admin_index_path) }
+    end
+
+    context "unsuccessfully" do
+      before do
+        product.should_receive(:save) { false }
+        post :create
+      end
+
+      it { should render_template(:new) }
+    end
+  end
 end
