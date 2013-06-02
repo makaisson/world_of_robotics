@@ -93,7 +93,6 @@ describe Product do
     end
 
     it 'returns an unsaved product if category is invalid' do
-      pending("Unimplemented")
       product = Product.create_with_category(
         category.id + 1,
         product_attributes

@@ -12,10 +12,10 @@ class Product < ActiveRecord::Base
 
   def self.create_with_category(category_id, product_attributes)
     Product.transaction do
-      product = Product.new(product_attributes)
+      product =  Product.new(product_attributes)
+      category = Category.find_by_id(category_id)
 
-      if product.save
-        # explicity create the join table entry because magic is hard
+      if category && product.save
         Categorization.create(
           product_id:  product.id,
           category_id: category_id
