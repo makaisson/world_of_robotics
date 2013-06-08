@@ -20,6 +20,8 @@ class Product < ActiveRecord::Base
           product_id:  product.id,
           category_id: category_id
         )
+      elsif !category
+        product.errors.add(:categories, "Category is invalid")
       end
 
       product

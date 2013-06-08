@@ -28,12 +28,12 @@ describe Product do
   end
 
   describe "#destroy" do
-    let(:product) { FactoryGirl.build :product }
-    let(:cart)    { FactoryGirl.build :cart }
+    let(:product) { FactoryGirl.build(:product) }
+    let(:cart)    { FactoryGirl.build(:cart) }
 
     context "line items reference the product" do
       before :each do
-        line_item = LineItem.new
+        line_item         = LineItem.new
         line_item.product = product
         line_item.cart    = cart
         line_item.save
@@ -41,32 +41,29 @@ describe Product do
 
       it "should add an error to the model base" do
         product.destroy
-
         product.errors[:base].should == ['line items present']
       end
 
       it "should not delete the product" do
         product.destroy
-
         product.should be_persisted
       end
     end
 
-    context "not line items reference the product" do
+    context "no line items reference the product" do
       before :each do
         LineItem.delete_all
       end
 
       it "should delete the product" do
         product.destroy
-
         product.should_not be_persisted
       end
     end
   end
 
   describe 'creating with a category' do
-    let(:category) { FactoryGirl.create :category }
+    let(:category) { FactoryGirl.create(:category) }
     let(:product_attributes) {
       FactoryGirl.attributes_for(:product).slice(:title, :description).merge(
         price: 10
@@ -98,6 +95,7 @@ describe Product do
         product_attributes
       )
       product.should_not be_persisted
+      product.errors.should_not be_empty
     end
   end
 end
