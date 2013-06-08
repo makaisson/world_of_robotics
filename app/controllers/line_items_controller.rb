@@ -6,7 +6,8 @@ class LineItemsController < ApplicationController
     if service.add
       redirect_to cart
     else
-      redirect_to root_path #this should do something useful
+      #TODO this should do something useful
+      redirect_to root_path
     end
   end
 
