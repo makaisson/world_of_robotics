@@ -90,39 +90,26 @@ describe LineItemsController do
   end
 
   describe "#destroy" do
-    let(:cart)      { mock_model(Cart) }
-    let(:line_item) { double(:line_item, quantity: quantity) }
-    let(:quantity)  { double }
+    let(:cart)             { mock_model('Cart', id: 1, line_items: line_items) }
+    let(:line_items)       { double('line items', empty?: line_items_empty) }
+    let(:line_items_empty) { double }
+    let(:line_item)        { double(:line_item, id: 1) }
 
     before do
+      line_item.should_receive(:destroy_line_item)
       Cart.stub(create: cart)
       stub_const('LineItem', double(find: line_item))
-      cart.stub(line_items: [])
+      delete :destroy, id: 1
     end
 
-    context "the line item quantity is greater than 1" do
-      let(:quantity) { 2 }
-
-      it "should decrement the line item quantity" do
-        pending "How can I update an attribute without using a model/factory?"
-        line_item.should_receive(:update_attributes)
-
-        delete :destroy, id: 1
-      end
+    context "there are no more line items" do
+      let(:line_items_empty) { true }
+      it { should redirect_to(products_path) }
     end
 
-    context "the line item quantity is 1" do
-      let(:quantity) { 1 }
-
-      it "should destroy the line item" do
-        line_item.should_receive(:destroy)
-
-        # QUESTION
-        # how does this know what to destroy?
-        # I randomly picked an ID...
-        delete :destroy, id: 1
-      end
+    context "there are line items in the cart" do
+      let(:line_items_empty) { false }
+      it { should redirect_to(cart) }
     end
-
   end
 end

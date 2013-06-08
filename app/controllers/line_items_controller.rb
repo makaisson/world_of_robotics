@@ -14,14 +14,9 @@ class LineItemsController < ApplicationController
     line_item = LineItem.find(params[:id])
     cart      = current_cart
 
-    # TODO: There is a race condition here.
-    if line_item.quantity > 1
-      line_item.update_attributes(quantity: line_item.quantity -= 1)
-    else
-      line_item.destroy
-    end
+    line_item.destroy_line_item
 
-    if current_cart.line_items.empty?
+    if cart.line_items.empty?
       redirect_to products_path
     else
       redirect_to cart
