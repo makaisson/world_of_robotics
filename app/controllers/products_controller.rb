@@ -12,10 +12,10 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.create_with_category(
-      params.require(:category)[:id],
-      params.require(:product).permit(:title, :description, :price),
-    )
+    @product = CreateProductWithCategoryService.new(
+      params[:product],
+      params[:category][:id]
+    ).create
 
     if @product.persisted?
       redirect_to admin_index_path

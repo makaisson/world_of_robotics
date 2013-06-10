@@ -4,7 +4,7 @@ class AddLineItemService
   end
 
   def add
-    current_item ||= cart.line_items.find_by_product_id product.id
+    current_item ||= cart.line_items.find_by_product_id(product.id)
 
     if current_item
       current_item.quantity += 1

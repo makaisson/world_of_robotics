@@ -10,25 +10,6 @@ class Product < ActiveRecord::Base
 
   before_destroy :ensure_not_referenced_by_any_line_items
 
-  def self.create_with_category(category_id, product_attributes)
-    # TODO: delete Product. I honestly have no idea why this is here
-    Product.transaction do
-      product =  Product.new(product_attributes)
-      category = Category.find_by_id(category_id)
-
-      if category && product.save
-        Categorization.create(
-          product_id:  product.id,
-          category_id: category_id
-        )
-      elsif !category
-        product.errors.add(:categories, "Category is invalid")
-      end
-
-      product
-    end
-  end
-
   private
 
   def ensure_not_referenced_by_any_line_items

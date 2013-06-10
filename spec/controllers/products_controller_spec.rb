@@ -28,9 +28,9 @@ describe ProductsController do
     let(:product) { double(:product, id: 1) }
 
     before do
-      Product
-        .should_receive(:create_with_category)
-        .with('123', 'title' => 'Awesome Robot')
+      CreateProductWithCategoryService
+        .should_receive(:new)
+        .with({ 'title' => 'Awesome Robot' },'123')
         .and_return(product)
 
       post :create, {
