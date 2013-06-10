@@ -15,24 +15,21 @@ describe LineItem do
   end
 
   describe "#destroy_line_item" do
-    let(:line_item) { FactoryGirl.create(:line_item) }
-
     context "the line item quantity is greater than 1" do
+      let(:line_item) { FactoryGirl.create(:line_item, quantity: 2) }
+
       it "should decrement the line item quantity" do
-        line_item.quantity = 2
         line_item.destroy_line_item
         line_item.quantity.should == 1
       end
     end
 
     context "the line item quantity is 1" do
+      let(:line_item) { FactoryGirl.create(:line_item, quantity: 1) }
+
       it "should destroy the line_item" do
-        line_item.quantity = 1
         line_item.destroy_line_item
-        #TODO: WHY WONT YOU DIE? destroy_line_item appears to return destroy
-        # without complaining. But line item doesn't go away. It also reports
-        # it never received destroy.
-        line_item.should_receive(:destroy)
+        line_item.should_not be_persisted
       end
     end
   end
