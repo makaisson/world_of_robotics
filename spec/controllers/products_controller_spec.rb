@@ -26,13 +26,10 @@ describe ProductsController do
 
   describe "#create" do
     let(:product) { double(:product, id: 1) }
+    let(:service) { double(:create_product, create: product) }
 
     before do
-      CreateProductWithCategoryService
-        .should_receive(:new)
-        .with({ 'title' => 'Awesome Robot' },'123')
-        .and_return(product)
-
+      stub_const('CreateProductWithCategoryService', double(new: service))
       post :create, {
         product:  {title: 'Awesome Robot'},
         category: {id: 123}

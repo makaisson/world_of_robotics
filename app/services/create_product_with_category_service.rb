@@ -5,9 +5,7 @@ class CreateProductWithCategoryService
 
   def create
     #TODO: figure out how to white list these attributes
-    product_attributes = ActionController::Parameters.new({ product: @product_attributes })
-
-    product = Product.new(product_attributes.require(:product).permit!)
+    product = Product.new(@product_attributes)
     category = Category.find_by_id(@category_id)
 
     if category && product.save
