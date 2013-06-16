@@ -20,4 +20,7 @@ class Product < ActiveRecord::Base
       false
     end
   end
+
+  # TODO: Remove this once whitelist_attributes has been turned off
+  attr_accessible :title, :description, :price
 end

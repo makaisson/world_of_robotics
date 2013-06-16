@@ -13,8 +13,8 @@ class ProductsController < ApplicationController
 
   def create
     @product = CreateProductWithCategoryService.new(
-      params[:product],
-      params[:category][:id]
+      params.require(:product).permit(:title, :description, :price),
+      params.require(:category)[:id]
     ).create
 
     if @product.persisted?

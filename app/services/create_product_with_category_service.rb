@@ -4,9 +4,8 @@ class CreateProductWithCategoryService
   end
 
   def create
-    #TODO: figure out how to white list these attributes
-    product = Product.new(@product_attributes)
-    category = Category.find_by_id(@category_id)
+    product  = Product.new(product_attributes)
+    category = Category.find_by_id(category_id)
 
     if category && product.save
       Categorization.create(product_id: product.id, category_id: category.id)
@@ -19,5 +18,5 @@ class CreateProductWithCategoryService
 
   private
 
-  attr_reader :product_params, :category_id
+  attr_reader :product_attributes, :category_id
 end
