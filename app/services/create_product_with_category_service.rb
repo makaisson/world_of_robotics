@@ -13,7 +13,7 @@ class CreateProductWithCategoryService
       category = Category.find_by_id(category_id)
 
       if category && product.save
-        Categorization.create(product_id: product.id, category_id: category.id)
+        Categorization.create!(product_id: product.id, category_id: category.id)
       elsif !category
         product.errors.add(:categories, "Category is invalid")
       end
