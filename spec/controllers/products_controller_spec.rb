@@ -25,11 +25,13 @@ describe ProductsController do
   end
 
   describe "#create" do
-    let(:product) { double(:product, id: 1) }
-    let(:service) { double(:create_product, create: product) }
+    let(:product) { double('Product', id: 1) }
+    let(:service) {
+      double('CreateProductWithCategoryService', create: product)
+    }
 
     before do
-      stub_const('CreateProductWithCategoryService', double(new: service))
+      stub_const('CreateProductWithCategoryService', service)
       post :create, {
         product:  {title: 'Awesome Robot'},
         category: {id: 123}

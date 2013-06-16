@@ -3,6 +3,10 @@ class CreateProductWithCategoryService
     @product_attributes, @category_id = product_attributes, category_id
   end
 
+  def self.create(*args)
+    new(*args).create
+  end
+
   def create
     product  = Product.new(product_attributes)
     category = Category.find_by_id(category_id)

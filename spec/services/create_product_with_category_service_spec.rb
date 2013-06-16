@@ -10,10 +10,10 @@ describe CreateProductWithCategoryService do
     }
     context "valid product attributes and cateogry id exists" do
       it "saves the product and associates it with a category" do
-        product = CreateProductWithCategoryService.new(
+        product = CreateProductWithCategoryService.create(
           product_attributes,
           category.id
-        ).create
+        )
         product.should be_persisted
         product.categories.should == [category]
       end
@@ -21,10 +21,10 @@ describe CreateProductWithCategoryService do
 
     context "product attributes are invalid" do
       it "returns an unsaved product with errors" do
-        product = CreateProductWithCategoryService.new(
+        product = CreateProductWithCategoryService.create(
           {},
           category.id
-        ).create
+        )
 
         product.should_not be_persisted
         product.errors.should_not be_empty
@@ -33,10 +33,10 @@ describe CreateProductWithCategoryService do
 
     context "category id doesn't exist" do
       it "returns an unsaved product with errors" do
-        product = CreateProductWithCategoryService.new(
+        product = CreateProductWithCategoryService.create(
           product_attributes,
           category.id + 1
-        ).create
+        )
         product.should_not be_persisted
         product.errors.should_not be_empty
       end
