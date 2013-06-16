@@ -8,16 +8,18 @@ class CreateProductWithCategoryService
   end
 
   def create
-    product  = Product.new(product_attributes)
-    category = Category.find_by_id(category_id)
+    Product.transaction do
+      product  = Product.new(product_attributes)
+      category = Category.find_by_id(category_id)
 
-    if category && product.save
-      Categorization.create(product_id: product.id, category_id: category.id)
-    elsif !category
-      product.errors.add(:categories, "Category is invalid")
+      if category && product.save
+        Categorization.create(product_id: product.id, category_id: category.id)
+      elsif !category
+        product.errors.add(:categories, "Category is invalid")
+      end
+
+      product
     end
-
-    product
   end
 
   private
